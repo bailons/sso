@@ -1,8 +1,10 @@
 package com.sso.client.plugin.controller;
 
 import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -43,7 +45,7 @@ public class SsoClientController {
 	
 	@RequestMapping("/ssoLogout")
 	@ResponseBody
-	public String ssoLogout(String userName) {
+	public String ssoLogout(@Param("userName") String userName) {
 		String userToken = userAccessService.getUserToken(userName);
 		if(userToken!=null) {
 			String returnUrl = ssoServerPath+"/logoutByToken?ssoToken="+userToken;

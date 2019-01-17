@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -123,7 +124,7 @@ public class SsoServerController {
 	
 	@RequestMapping(value="/logoutByToken",method=RequestMethod.GET)
 	@ResponseBody
-	public String logoutByToken(String ssoToken) {
+	public String logoutByToken(@Param("ssoToken") String ssoToken) {
 		List<String> addressList = authSessionService.logoutByToken(ssoToken);
 		if(addressList!=null) {
 			//addressList.stream().forEach(s -> sendLogout2Client(s,ssoToken));
